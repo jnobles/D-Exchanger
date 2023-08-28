@@ -32,6 +32,10 @@ class Model:
         final_enrichment = ((substrate_enrichment * substrate_H_moles) + (d2o_enrichment * moles_D)) / total_moles
         self.rxn_pass[-1]['final_enrichment'] = final_enrichment
 
+    def recalculate(self):
+        for i in range(len(self.rxn_pass)):
+            self.rxn_pass[i]
+
 if __name__ == '__main__':
     model = Model()
     model.mass_substrate = 300

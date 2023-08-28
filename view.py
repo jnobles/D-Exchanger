@@ -12,6 +12,7 @@ class MainView(tk.Tk):
         self.title("Pass Calculator")
         self.protocol("WM_DELETE_WINDOW", self.destroy)
         self.resizable(False, False)
+        self.withdraw()
 
     def add_pass_row(self):
         stringVar_mass = tk.StringVar()
@@ -60,7 +61,7 @@ class MainView(tk.Tk):
         self.button_add = ttk.Button(self, text="+", command=self.add_pass_row)
         self.button_add.grid(row=1, column=2, sticky="nsew")
 
-        for i in range(4):
+        for i in range(10):
             self.add_pass_row()
 
 
@@ -68,6 +69,7 @@ class InitialDialog(tk.Toplevel):
     def __init__(self, parent):
         super().__init__()
         self.parent = parent
+        self.entries = {}
         self.create_view()
 
         self.title("Input Data")
@@ -76,31 +78,37 @@ class InitialDialog(tk.Toplevel):
 
     def create_view(self):
         ttk.Label(self, text="Mass of Substrate").grid(row=0, column=0, sticky="e")
-        self.mass_substrate = tk.StringVar()
-        entry_mass_substrate = ttk.Entry(self, textvariable=self.mass_substrate, width=20)
+        self.entries["mass_substrate"] = tk.StringVar()
+        entry_mass_substrate = ttk.Entry(self, textvariable=self.entries["mass_substrate"], width=20)
         entry_mass_substrate.grid(row=0, column=1)
         ttk.Label(self, text="g", background="white").grid(row=0, column=1, sticky="e", padx=(0,3))
 
         ttk.Label(self, text="MW of Substrate").grid(row=1, column=0, sticky="e")
-        self.mw_substrate = tk.StringVar()
-        entry_mw_substrate = ttk.Entry(self, textvariable=self.mw_substrate, width=20)
+        self.entries["mw_substrate"] = tk.StringVar()
+        entry_mw_substrate = ttk.Entry(self, textvariable=self.entries["mw_substrate"], width=20)
         entry_mw_substrate.grid(row=1, column=1)
         ttk.Label(self, text="g/mol", background="white").grid(row=1, column=1, sticky="e", padx=(0,3))
 
         ttk.Label(self, text="Exchanging H's").grid(row=2, column=0, sticky="e")
-        self.ex_H__substrate = tk.StringVar()
-        entry_ex_H__substrate = ttk.Entry(self, textvariable=self.ex_H__substrate, width=20)
-        entry_ex_H__substrate.grid(row=2, column=1)
+        self.entries["ex_H_substrate"] = tk.StringVar()
+        entry_ex_H_substrate = ttk.Entry(self, textvariable=self.entries["ex_H_substrate"], width=20)
+        entry_ex_H_substrate.grid(row=2, column=1)
         ttk.Label(self, text="H's", background="white").grid(row=2, column=1, sticky="e", padx=(0,3))
 
-        ttk.Label(self, text="Initial Enrichment").grid(row=3, column=0, sticky="e")
-        self.init_enrich__substrate = tk.StringVar()
-        entry_init_enrich__substrate = ttk.Entry(self, textvariable=self.init_enrich__substrate, width=20)
-        entry_init_enrich__substrate.grid(row=3, column=1)
-        ttk.Label(self, text="%", background="white").grid(row=3, column=1, sticky="e", padx=(0,3))
+        ttk.Label(self, text="D2O per Pass").grid(row=3, column=0, sticky="e")
+        self.entries["d2o_per_pass"] = tk.StringVar()
+        entry_init_enrich_substrate = ttk.Entry(self, textvariable=self.entries["d2o_per_pass"], width=20)
+        entry_init_enrich_substrate.grid(row=3, column=1)
+        ttk.Label(self, text="g", background="white").grid(row=3, column=1, sticky="e", padx=(0,3))
+
+        ttk.Label(self, text="Initial Enrichment").grid(row=4, column=0, sticky="e")
+        self.entries["init_enrich_substrate"] = tk.StringVar()
+        entry_init_enrich_substrate = ttk.Entry(self, textvariable=self.entries["init_enrich_substrate"], width=20)
+        entry_init_enrich_substrate.grid(row=4, column=1)
+        ttk.Label(self, text="%", background="white").grid(row=4, column=1, sticky="e", padx=(0,3))
 
         self.button_next = ttk.Button(self, text="Next")
-        self.button_next.grid(row=4, column=0, columnspan=2, sticky="nsew")
+        self.button_next.grid(row=5, column=0, columnspan=2, sticky="nsew")
 
 
 if __name__ == "__main__":
