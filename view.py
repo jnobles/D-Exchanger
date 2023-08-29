@@ -12,7 +12,9 @@ class MainView(tk.Tk):
         self.title("Pass Calculator")
         self.protocol("WM_DELETE_WINDOW", self.destroy)
         self.resizable(False, False)
-        self.withdraw()
+
+        self.eval("tk::PlaceWindow . center")
+        self.eval(f"tk::PlaceWindow {str(self.initial_dialog)} center")
 
     def add_pass_row(self):
         stringVar_mass = tk.StringVar()
@@ -37,8 +39,9 @@ class MainView(tk.Tk):
         self.passes[-1]["entry_enrichment"].grid(row=last_row, column=2)
         self.passes[-1]["entry_enrichment_unit"].grid(row=last_row, column=2, sticky="e", padx=(0,3))
         self.passes[-1]["entry_result"].grid(row=last_row, column=3)
-        self.button_add.grid(row=last_row+1, column=3, sticky="nsew")
-        self.button_remove.grid(row=last_row+1, column=2, sticky="nsew")
+        self.button_add.grid(row=last_row+1, column=2, sticky="nsew")
+        self.button_remove.grid(row=last_row+1, column=1, sticky="nsew")
+        self.button_recalculate.grid(row=last_row+1, column=3, sticky="nsew")
 
 
     def remove_pass_row(self):
@@ -60,6 +63,8 @@ class MainView(tk.Tk):
         self.button_remove.grid(row=1, column=1, sticky="nsew")
         self.button_add = ttk.Button(self, text="+", command=self.add_pass_row)
         self.button_add.grid(row=1, column=2, sticky="nsew")
+        self.button_recalculate = ttk.Button(self, text="Recalculate")
+        self.button_recalculate.grid(row=1, column=3, sticky="nsew")
 
         for i in range(10):
             self.add_pass_row()
