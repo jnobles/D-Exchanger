@@ -33,6 +33,8 @@ class Model:
         self.rxn_pass[-1]['final_enrichment'] = final_enrichment
 
     def remove_pass(self):
+        if len(self.rxn_pass) == 1:
+            return
         self.rxn_pass.pop()
 
     def recalculate(self):
