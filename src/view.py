@@ -4,6 +4,12 @@ from tkinter import ttk
 class MainView(tk.Tk):
     def __init__(self):
         super().__init__()
+
+        self.style = ttk.Style(self)
+        self.style.configure("TLabel", font=("Helvetica", 14))
+        self.style.configure("TButton", font=("Helvetica", 14))
+        self.style.configure("TEntry", font=("Helvetica", 14))
+
         self.initial_dialog = InitialDialog(self)
         self.passes = []
 
@@ -24,12 +30,15 @@ class MainView(tk.Tk):
             "label_number":ttk.Label(self, text=len(self.passes)+1),
             "stringVar_mass":stringVar_mass, 
             "stringVar_enrichment":stringVar_enrichment,
-            "entry_mass":ttk.Entry(self, textvariable=stringVar_mass), 
+            "entry_mass":ttk.Entry(self, textvariable=stringVar_mass,
+                                   font=self.style.lookup("TEntry", "font")),
             "label_mass_unit":ttk.Label(self, text="g", background="white"),
-            "entry_enrichment":ttk.Entry(self, textvariable=stringVar_enrichment),
+            "entry_enrichment":ttk.Entry(self, textvariable=stringVar_enrichment,
+                                         font=self.style.lookup("TEntry", "font")),
             "label_enrichment_unit":ttk.Label(self, text="%", background="white"),
             "stringVar_result":stringVar_result,
-            "entry_result":ttk.Entry(self, textvariable=stringVar_result, state="disabled"),
+            "entry_result":ttk.Entry(self, textvariable=stringVar_result, state="disabled",
+                                     font=self.style.lookup("TEntry", "font")),
         })
 
         last_row = self.grid_size()[1]
@@ -99,31 +108,36 @@ class InitialDialog(tk.Toplevel):
     def create_view(self):
         ttk.Label(self, text="Mass of Substrate").grid(row=0, column=0, sticky="e")
         self.stringVars["mass_substrate"] = tk.StringVar()
-        self.entries["entry_mass_substrate"] = ttk.Entry(self, textvariable=self.stringVars["mass_substrate"], width=20)
+        self.entries["entry_mass_substrate"] = ttk.Entry(self, textvariable=self.stringVars["mass_substrate"], width=20,
+                                                         font=self.parent.style.lookup("TEntry", "font"))
         self.entries["entry_mass_substrate"].grid(row=0, column=1)
         ttk.Label(self, text="g", background="white").grid(row=0, column=1, sticky="e", padx=(0,3))
 
         ttk.Label(self, text="MW of Substrate").grid(row=1, column=0, sticky="e")
         self.stringVars["mw_substrate"] = tk.StringVar()
-        self.entries["entry_mw_substrate"] = ttk.Entry(self, textvariable=self.stringVars["mw_substrate"], width=20)
+        self.entries["entry_mw_substrate"] = ttk.Entry(self, textvariable=self.stringVars["mw_substrate"], width=20,
+                                                       font=self.parent.style.lookup("TEntry", "font"))
         self.entries["entry_mw_substrate"].grid(row=1, column=1)
         ttk.Label(self, text="g/mol", background="white").grid(row=1, column=1, sticky="e", padx=(0,3))
 
         ttk.Label(self, text="Exchanging H's").grid(row=2, column=0, sticky="e")
         self.stringVars["ex_H_substrate"] = tk.StringVar()
-        self.entries["entry_ex_H_substrate"] = ttk.Entry(self, textvariable=self.stringVars["ex_H_substrate"], width=20)
+        self.entries["entry_ex_H_substrate"] = ttk.Entry(self, textvariable=self.stringVars["ex_H_substrate"], width=20,
+                                                         font=self.parent.style.lookup("TEntry", "font"))
         self.entries["entry_ex_H_substrate"].grid(row=2, column=1)
         ttk.Label(self, text="H's", background="white").grid(row=2, column=1, sticky="e", padx=(0,3))
 
         ttk.Label(self, text="D2O per Pass").grid(row=3, column=0, sticky="e")
         self.stringVars["d2o_per_pass"] = tk.StringVar()
-        self.entries["entry_init_enrich_substrate"] = ttk.Entry(self, textvariable=self.stringVars["d2o_per_pass"], width=20)
+        self.entries["entry_init_enrich_substrate"] = ttk.Entry(self, textvariable=self.stringVars["d2o_per_pass"], width=20,
+                                                                font=self.parent.style.lookup("TEntry", "font"))
         self.entries["entry_init_enrich_substrate"].grid(row=3, column=1)
         ttk.Label(self, text="g", background="white").grid(row=3, column=1, sticky="e", padx=(0,3))
 
         ttk.Label(self, text="Initial Enrichment").grid(row=4, column=0, sticky="e")
         self.stringVars["init_enrich_substrate"] = tk.StringVar()
-        self.entries["entry_init_enrich_substrate"] = ttk.Entry(self, textvariable=self.stringVars["init_enrich_substrate"], width=20)
+        self.entries["entry_init_enrich_substrate"] = ttk.Entry(self, textvariable=self.stringVars["init_enrich_substrate"],
+                                                                width=20, font=self.parent.style.lookup("TEntry", "font"))
         self.entries["entry_init_enrich_substrate"].grid(row=4, column=1)
         ttk.Label(self, text="%", background="white").grid(row=4, column=1, sticky="e", padx=(0,3))
 
