@@ -82,8 +82,8 @@ class Controller:
         return True
 
 
-from View import MainView
-from Model import Model
+from view import MainView
+from model import Model
 if __name__ == '__main__':
     view = MainView()
     model = Model()
