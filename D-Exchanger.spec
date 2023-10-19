@@ -5,7 +5,7 @@ block_cipher = None
 
 
 a = Analysis(
-    ['presenter.py'],
+    ['src/controller.py'],
     pathex=[],
     binaries=[],
     datas=[],
@@ -21,7 +21,7 @@ a = Analysis(
 )
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
 splash = Splash(
-    'splash.png',
+    'src/resources/splash.png',
     binaries=a.binaries,
     datas=a.datas,
     text_pos=(10, 55),
@@ -54,5 +54,5 @@ exe = EXE(
     entitlements_file=None,
     # https://icons8.com/icon/9TRf5n2qvUKd/cylinders-chained
     # Cylinders Chained icon by Icons8
-    icon=['icon.png']
+    icon=['src/resources/icon.png']
 )
